@@ -1,12 +1,12 @@
 ---
-title: "ZVH Zápoètovı TEST - Varianta `r params$varianta`"
+title: "ZVH ZÃ¡poÄtovÃ½ TEST - Varianta `r params$varianta`"
 # subtitle: "Varianta `r params$varianta`"
 # author: ""
 header-includes: 
 - \usepackage{fancyhdr}
 - \pagestyle{fancy}
 - \fancyhf{}
-- \chead{Jméno a pøíjmení:}
+- \chead{JmÃ©no a pÅ™Ã­jmenÃ­:}
 - \lhead{Varianta `r params$varianta`}
 - \usepackage{float}
 - \usepackage{graphics}
@@ -17,7 +17,7 @@ output: pdf_document
 params:
   n: 1
   d: !r Sys.Date()
-  varianta: A
+  varianta: B
 ---
 
 ```{r setup, include = FALSE}
@@ -25,58 +25,58 @@ knitr::opts_chunk$set(echo = TRUE)
 options(OutDec = ",")
 ```
 
-## Slepá mapa (15 bodù)
+## SlepÃ¡ mapa (15 bodÅ¯)
 ```{r, echo = FALSE}
 vsechny_reky <- c("Kamenice",
-          "Smìdá",
-          "Luická Nisa",
-          "Plouènice",
+          "SmÄ›dÃ¡",
+          "LuÅ¾ickÃ¡ Nisa",
+          "PlouÄnice",
           "Kamenice",
           "Labe",
-          "Bílina", 
+          "BÃ­lina", 
           "Chomutovka", 
-          "Ohøe",
+          "OhÅ™e",
           "Liboc",
-          "Úpa", 
+          "Ãšpa", 
           "Metuje", 
           "Jizera", 
           "Mrlina", 
           "Cidlina", 
-          "Bystøice",
+          "BystÅ™ice",
           "Orlice",
-          "Tichá Orlice",
-          "Teplá",
-          "Støela",
-          "Rakovnickı potok",
-          "Lodìnice",
+          "TichÃ¡ Orlice",
+          "TeplÃ¡",
+          "StÅ™ela",
+          "RakovnickÃ½ potok",
+          "LodÄ›nice",
           "Litavka", 
           "Berounka",
           "Vltava",
-          "Me",
+          "MÅ¾e",
           "Rokytka",
-          "Vırovka", 
-          "elivka", 
-          "Radbùza",
-          "Úhlava",
-          "Úslava",
+          "VÃ½rovka", 
+          "Å½elivka", 
+          "RadbÅ¯za",
+          "Ãšhlava",
+          "Ãšslava",
           "Lomnice",
           "Otava", 
-          "Køemelná",
-          "Volyòka",
+          "KÅ™emelnÃ¡",
+          "VolyÅˆka",
           "Blanice",
           "Doubrava",
           "Doubrava",
-          "Louèná",
+          "LouÄnÃ¡",
           "Chrudimka",
-          "Moravská Sázava",
-          "Tøebùvka",
+          "MoravskÃ¡ SÃ¡zava",
+          "TÅ™ebÅ¯vka",
           "Morava",
-          "Sázava",
-          "Malše",
-          "Lunice",
-          "Neárka",
-          "Moravská Dyje",
-          "Rokytná",
+          "SÃ¡zava",
+          "MalÅ¡e",
+          "LuÅ¾nice",
+          "NeÅ¾Ã¡rka",
+          "MoravskÃ¡ Dyje",
+          "RokytnÃ¡",
           "Jihlava",
           "Oslava",
           "Dyje",
@@ -84,69 +84,69 @@ vsechny_reky <- c("Kamenice",
           "Svratka",
           "Svitava",
           "Osoblaha",
-          "Bìlá",
+          "BÄ›lÃ¡",
           "Opava",
           "Moravice",
           "Odra",
-          "Olše",
-          "Haná",
-          "Beèva",
+          "OlÅ¡e",
+          "HanÃ¡",
+          "BeÄva",
           "Ostravice",
-          "Ronovská Beèva",
-          "Vsetínská Beèva",
-          "Olšava",
-          "Vlára", 
+          "RoÅ¾novskÃ¡ BeÄva",
+          "VsetÃ­nskÃ¡ BeÄva",
+          "OlÅ¡ava",
+          "VlÃ¡ra", 
           "Morava")
 vsechny_nadrze <- c("Jirkov", 
-                    "Fláje",
-                    "Josefùv Dùl",
-                    "Labská",
-                    "Rozkoš",
+                    "FlÃ¡je",
+                    "JosefÅ¯v DÅ¯l",
+                    "LabskÃ¡",
+                    "RozkoÅ¡",
                     "Nechranice",
-                    "Máchovo jezero",
-                    "lutice",
+                    "MÃ¡chovo jezero",
+                    "Å½lutice",
                     "Hracholusky",
-                    "Nırsko",
-                    "Vrané",
-                    "Štìchovice",
+                    "NÃ½rsko",
+                    "VranÃ©",
+                    "Å tÄ›chovice",
                     "Slapy",
-                    "Kamık",
-                    "Orlík",
-                    "Koøensko",
-                    "Hnìvkovice",
+                    "KamÃ½k",
+                    "OrlÃ­k",
+                    "KoÅ™ensko",
+                    "HnÄ›vkovice",
                     "Lipno I.",
                     "Lipno II.",
                     "Bezdrev",
-                    "Øímov",
-                    "Svìt",
-                    "Romberk",
-                    "Staòkovskı rybník/rybník Hejtman",
-                    "elivka - Švihov",
+                    "Å˜Ã­mov",
+                    "SvÄ›t",
+                    "RoÅ¾mberk",
+                    "StaÅˆkovskÃ½ rybnÃ­k/rybnÃ­k Hejtman",
+                    "Å½elivka - Å vihov",
                     "Pastviny",
-                    "Slezská Harta",
-                    "Kruberk",
-                    "Šance",
-                    "Seè",
-                    "Vír",
-                    "Brnìnská pøehrada",
+                    "SlezskÃ¡ Harta",
+                    "KruÅ¾berk",
+                    "Å ance",
+                    "SeÄ",
+                    "VÃ­r",
+                    "BrnÄ›nskÃ¡ pÅ™ehrada",
                     "Vranov",
-                    "Nové Mlıny")
+                    "NovÃ© MlÃ½ny")
 vybrane_reky <- sample(vsechny_reky, 10)
 vybrane_nadrze <- sample(vsechny_nadrze, 5)
 ```
 
 
-Zaneste do slepé mapy následující øeky: \par 
+Zaneste do slepÃ© mapy nÃ¡sledujÃ­cÃ­ Å™eky: \par 
 *`r vybrane_reky`.*
 \par 
-Dále v mapì vyznaète tyto nádre: \par 
+DÃ¡le v mapÄ› vyznaÄte tyto nÃ¡drÅ¾e: \par 
 *`r vybrane_nadrze`*
 \begin{figure}[h!]
   \makebox[\textwidth]{\includegraphics[width = \textwidth, angle = -90]{Slepa_mapa_reky_nadrze.pdf}}
 \end{figure}
 \FloatBarrier
 
-## Pøíklad 1 (7 bodù)
+## PÅ™Ã­klad 1 (7 bodÅ¯)
 ```{r echo = FALSE}
 PR1 <- list()
 PR1$A <- round(runif(1, 4, 14), 0)
@@ -154,11 +154,11 @@ PR1$Hs <- round(runif(1, 400, 900), 0)
 PR1$Qa <- round(runif(1, 40, 90), 0)
 ```
 
-Vıpoèítejte odtokovı souèinitel $\varphi$ v povodí o velikosti $A$ = `r PR1$A` km$^{2}$, kde roèní úhrn sráek je $H_S$ = `r PR1$Hs` mm
-a prùmìrnı roèní prùtok v uzávìrovém profilu povodí je $Q_a$ = `r PR1$Qa` l$\cdot$ s$^{-1}$
+VÃ½poÄÃ­tejte odtokovÃ½ souÄinitel $\varphi$ v povodÃ­ o velikosti $A$ = `r PR1$A` km$^{2}$, kde roÄnÃ­ Ãºhrn srÃ¡Å¾ek je $H_S$ = `r PR1$Hs` mm
+a prÅ¯mÄ›rnÃ½ roÄnÃ­ prÅ¯tok v uzÃ¡vÄ›rovÃ©m profilu povodÃ­ je $Q_a$ = `r PR1$Qa` l$\cdot$ s$^{-1}$
 \vskip5cm
 
-## Pøíklad 2 (7 bodù)
+## PÅ™Ã­klad 2 (7 bodÅ¯)
 ```{r, echo = FALSE}
 PR2 <- list()
 PR2$A <- round(runif(1, 4, 25), 0)
@@ -166,32 +166,32 @@ PR2$Hs <- round(runif(1, 400, 1400), 0)
 PR2$phi <- round(runif(1, 0, 1), 2)
 ```
 
-<!-- `r if(params$varianta == "A"){"##Pøíklad 2 \nVypoèítejte mìsíèní bilanci \n\n$ $\n"}` -->
-Vypoètìte odtok (l$\cdot$s$^{-1}$) z území o rozloze $A$ = `r PR2$A` km$^2$, kterému náleí roèní úhrn sráek $Hs$ = `r PR2$Hs` mm a odtokovı souèintel $\varphi$ = `r PR2$phi`.
+<!-- `r if(params$varianta == "A"){"##PÅ™Ã­klad 2 \nVypoÄÃ­tejte mÄ›sÃ­ÄnÃ­ bilanci \n\n$ $\n"}` -->
+VypoÄtÄ›te odtok (l$\cdot$s$^{-1}$) z ÃºzemÃ­ o rozloze $A$ = `r PR2$A` km$^2$, kterÃ©mu nÃ¡leÅ¾Ã­ roÄnÃ­ Ãºhrn srÃ¡Å¾ek $Hs$ = `r PR2$Hs` mm a odtokovÃ½ souÄintel $\varphi$ = `r PR2$phi`.
 \vskip5cm
 
-## Pøíklad 3 (7 bodù)
+## PÅ™Ã­klad 3 (7 bodÅ¯)
 ```{r, echo = FALSE}
-# Generování zadání rovnice kontinuity
+# GenerovÃ¡nÃ­ zadÃ¡nÃ­ rovnice kontinuity
 PR3 <- list()
-PR3$Q1 <- round(runif(1, min = 0.1, max = 10), 2) # prùmìr v cm2
+PR3$Q1 <- round(runif(1, min = 0.1, max = 10), 2) # prÅ¯mÄ›r v cm2
 PR3$v1 <- round(runif(1, min = 0.5, max = 4), 2)
 PR3$D1 <- round(runif(1, min = 0.5, max = 4), 2)
 
-PR3$Q2 <- round(runif(1, min = 0.1, max = 10), 2) # prùmìr v cm2
+PR3$Q2 <- round(runif(1, min = 0.1, max = 10), 2) # prÅ¯mÄ›r v cm2
 PR3$v2 <- round(runif(1, min = 0.5, max = 4), 2)
 PR3$D2 <- round(runif(1, min = 0.5, max = 4), 2)
 
-PR3$Q3 <- round(runif(1, min = 0.1, max = 10), 2) # prùmìr v cm2
+PR3$Q3 <- round(runif(1, min = 0.1, max = 10), 2) # prÅ¯mÄ›r v cm2
 PR3$v3 <- round(runif(1, min = 0.5, max = 4), 2)
 PR3$D3 <- round(runif(1, min = 0.5, max = 4), 2)
 
-PR3$Q4 <- round(runif(1, min = 0.1, max = 10), 2) # prùmìr v cm2
+PR3$Q4 <- round(runif(1, min = 0.1, max = 10), 2) # prÅ¯mÄ›r v cm2
 PR3$v4 <- round(runif(1, min = 0.5, max = 4), 2)
 PR3$D4 <- round(runif(1, min = 0.5, max = 4), 2)
 ```
 
-Potrubím protéká voda. Dopoèítejte hodnoty ve ètyøech mìøících profilech $S_1$ = `r PR3$Q1` cm$^{2}$. Uvaujte ideální kapalinu a kruhovı pøùøez potrubí. Uijte znalosti, e Q$_1$ = Q$_2$.  
+PotrubÃ­m protÃ©kÃ¡ voda. DopoÄÃ­tejte hodnoty ve ÄtyÅ™ech mÄ›Å™Ã­cÃ­ch profilech $S_1$ = `r PR3$Q1` cm$^{2}$. UvaÅ¾ujte ideÃ¡lnÃ­ kapalinu a kruhovÃ½ pÅ™Å¯Å™ez potrubÃ­. UÅ¾ijte znalosti, Å¾e Q$_1$ = Q$_2$.  
 
 
 \begin{table}[h!]
@@ -209,7 +209,7 @@ S (cm$^{2}$)           &            &            &            &              \\ 
 
 \vskip10cm    
 
-## Pøíklad 4 (7 bodù)
+## PÅ™Ã­klad 4 (7 bodÅ¯)
 ```{r, echo = FALSE}
 PR4 <- list()
 PR4$Q1 <- round(runif(1, 40, 90), 0)
@@ -218,10 +218,10 @@ PR4$Q2 <- round(runif(1, 1, 9), 0)
 PR4$c2 <- round(runif(1, 0.010, 0.050), 3)
 ```
 
-V pozorovaném místì byl v øece namìøen prùtok $Q_1$ = `r PR4$Q1` l$\cdot$ s$^{-1}$ a zjištìna koncentrace kontaminaèní látky $c_1=$ `r PR4$c1`  mg$\cdot$ l$^{-1}$. Dále po toku do nìj vstupuje vıpust $Q_2$ = `r PR4$Q2` l$\cdot$ s$^{-1}$ s koncentrací $Q_2=$ `r PR4$c2` mg$\cdot$ l$^{-1}$. Vypoèítejte celkovou koncetraci látky za soutokem.
+V pozorovanÃ©m mÃ­stÄ› byl v Å™ece namÄ›Å™en prÅ¯tok $Q_1$ = `r PR4$Q1` l$\cdot$ s$^{-1}$ a zjiÅ¡tÄ›na koncentrace kontaminaÄnÃ­ lÃ¡tky $c_1=$ `r PR4$c1`  mg$\cdot$ l$^{-1}$. DÃ¡le po toku do nÄ›j vstupuje vÃ½pust $Q_2$ = `r PR4$Q2` l$\cdot$ s$^{-1}$ s koncentracÃ­ $Q_2=$ `r PR4$c2` mg$\cdot$ l$^{-1}$. VypoÄÃ­tejte celkovou koncetraci lÃ¡tky za soutokem.
 \vskip5cm
 
-## Pøíklad 5 (7 bodù)
+## PÅ™Ã­klad 5 (7 bodÅ¯)
 
 ```{r, echo = FALSE}
 PR5 <- list()
@@ -229,38 +229,38 @@ PR5$h <- round(runif(1, 1, 2), 1)
 PR5$n <- round(runif(1, 0.02, 0.05), 2)
 ```
 
-Vypoèítejte prùtok v otevøeném pravidelném lichobìníkovém korytì ve vıšce $h$ = `r PR5$h`. Vyuijte Chézyho rovnice.    
+VypoÄÃ­tejte prÅ¯tok v otevÅ™enÃ©m pravidelnÃ©m lichobÄ›Å¾nÃ­kovÃ©m korytÄ› ve vÃ½Å¡ce $h$ = `r PR5$h`. VyuÅ¾ijte ChÃ©zyho rovnice.    
 Vzorce pro geometrii koryta:   
 $$
 O = b + 2\sqrt{(hm)^2 + h^2}\\
 S = h(b + hm)
 $$
-Dále je dán 2\% podélnı sklon koryta, drsnost obou bøehù `r PR5$n` a $m$ = 1,5.
+DÃ¡le je dÃ¡n 2\% podÃ©lnÃ½ sklon koryta, drsnost obou bÅ™ehÅ¯ `r PR5$n` a $m$ = 1,5.
 
 \newpage
-## Vısledky
-#### Pøíklad 1
+## VÃ½sledky
+#### PÅ™Ã­klad 1
 ```{r, echo = FALSE}
 PR1_res <- list()
 PR1_res$phi <- (PR1$Qa * 1e-03 * 60 * 60 * 24 * 365) / (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
 ```
-Odtokovı souèinitel je $\varphi$ = `r round(PR1_res$phi, 2)`.
+OdtokovÃ½ souÄinitel je $\varphi$ = `r round(PR1_res$phi, 2)`.
 
 
-#### Pøíklad 2   
+#### PÅ™Ã­klad 2   
 ```{r, echo = FALSE}
 PR2_res <- list()
 PR2_res$Qout <- (PR2$Hs * 1e-03 * 60 * 60 * 24 * 365) / (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
 ```
-Odtok z povodí je 
+Odtok z povodÃ­ je 
 
-#### Pøíklad 3   
-#### Pøíklad 4  
+#### PÅ™Ã­klad 3   
+#### PÅ™Ã­klad 4  
 ```{r, echo = FALSE}
 PR4_res <- list()
 PR4_res$cv <- (PR4$Q1 * PR4$c1 + PR4$Q2 + PR4$c2) / (PR4$Q1 + PR4$Q2)
 ```
 Koncentrace po soutoku je rovna $c$ = `r round(PR4_res$cv, 3)` mg$\cdot$ l$^{-1}$. 
 
-#### Pøíklad 5   
+#### PÅ™Ã­klad 5   
 
