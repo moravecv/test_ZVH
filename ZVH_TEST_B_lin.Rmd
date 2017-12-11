@@ -1,7 +1,7 @@
 ---
 title: "ZVH Zápočtový TEST - Varianta `r params$varianta`"
 # subtitle: "Varianta `r params$varianta`"
-# author: ""
+author: "Jméno a příjmení:"
 header-includes: 
 - \usepackage{fancyhdr}
 - \pagestyle{fancy}
@@ -12,12 +12,13 @@ header-includes:
 - \usepackage{graphics}
 - \usepackage{graphicx}
 - \usepackage{placeins}
+- \usepackage{amsmath}
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output: pdf_document
 params:
   n: 1
   d: !r Sys.Date()
-  varianta: A
+  varianta: B
 ---
 
 ```{r setup, include = FALSE}
@@ -142,7 +143,7 @@ Zaneste do slepé mapy následující řeky: \par
 Dále v mapě vyznačte tyto nádrže: \par 
 *`r vybrane_nadrze`*
 \begin{figure}[h!]
-  \makebox[\textwidth]{\includegraphics[width = \textwidth, angle = -90]{Slepa_mapa_reky_nadrze.pdf}}
+  \makebox[\textwidth]{\includegraphics[width = \paperwidth]{slepa_mapa_cb.pdf}}
 \end{figure}
 \FloatBarrier
 
@@ -191,7 +192,7 @@ PR3$v4 <- round(runif(1, min = 0.5, max = 4), 2)
 PR3$D4 <- round(runif(1, min = 0.5, max = 4), 2)
 ```
 
-Potrubím protéká voda. Dopočítejte hodnoty ve čtyřech měřících profilech $S_1$ = `r PR3$Q1` cm$^{2}$. Uvažujte ideální kapalinu a kruhový přůřez potrubí. Užijte znalosti, že Q$_1$ = Q$_2$.  
+Potrubím protéká voda. Dopočítejte hodnoty ve čtyřech měřících profilech. Uvažujte ideální kapalinu a kruhový přůřez potrubí. Užijte znalosti, že Q$_1$ = Q$_2$.  
 
 
 \begin{table}[h!]
@@ -199,10 +200,10 @@ Potrubím protéká voda. Dopočítejte hodnoty ve čtyřech měřících profil
 \begin{tabular}{|l|c|c|c|c|}
 \hline
 Profil                 & 1          & 2          & 3          & 4            \\ \hline
-v (m$\cdot$ s $^{-1}$) & `r PR3$v1` &            & `r PR3$v3` & 1/3 v$_3$    \\ \hline
+v (m$\cdot$ s $^{-1}$) & `r PR3$v1` &            & `r PR3$v3` &              \\ \hline
 Q (l$\cdot$ s $^{-1}$) &            &            & 2Q$_{2}$   & Q$_2$/4      \\ \hline
-D (cm)                 & `r PR3$D1` & `r PR3$D2` & 2D$_2$     & `r PR3$D4`   \\ \hline
-S (cm$^{2}$)           &            &            &            &              \\ \hline
+D (cm)                 & `r PR3$D1` & `r PR3$D2` &            &              \\ \hline
+S (cm$^{2}$)           &            &            &            & 1/3 S$_3$    \\ \hline
 \end{tabular}
 \end{table}
 
@@ -227,15 +228,18 @@ V pozorovaném místě byl v řece naměřen průtok $Q_1$ = `r PR4$Q1` l$\cdot$
 PR5 <- list()
 PR5$h <- round(runif(1, 1, 2), 1)
 PR5$n <- round(runif(1, 0.02, 0.05), 2)
+PR5$b <- round(runif(1,0.5,1.5),1)
 ```
 
 Vypočítejte průtok v otevřeném pravidelném lichoběžníkovém korytě ve výšce $h$ = `r PR5$h`. Využijte Chézyho rovnice.    
 Vzorce pro geometrii koryta:   
-$$
-O = b + 2\sqrt{(hm)^2 + h^2}\\
-S = h(b + hm)
-$$
-Dále je dán 2\% podélný sklon koryta, drsnost obou břehů `r PR5$n` a $m$ = 1,5.
+\begin{align}
+O &= b + 2\sqrt{(hm)^2 + h^2}\\   
+S &= h(b + hm)
+\end{align}
+
+Dále je dán 2\% podélný sklon koryta, drsnost obou břehů $n$ = `r PR5$n`, šířka dna $b$ = `r PR5$b` a sklon svahu $m$ = 1,5.
+
 
 \newpage
 ## Výsledky
@@ -246,15 +250,43 @@ PR1_res$phi <- (PR1$Qa * 1e-03 * 60 * 60 * 24 * 365) / (PR1$A * 1e+06 * PR1$Hs *
 ```
 Odtokový součinitel je $\varphi$ = `r round(PR1_res$phi, 2)`.
 
-
 #### Příklad 2   
 ```{r, echo = FALSE}
 PR2_res <- list()
 PR2_res$Qout <- (PR2$Hs * 1e-03 * 60 * 60 * 24 * 365) / (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
 ```
-Odtok z povodí je 
+Odtok z povodí je $Q$ = `r round(PR2_res$Qout, 2)` $m^{3}$
 
-#### Příklad 3   
+#### Příklad 3
+```{r, echo = FALSE}
+PR3_res <- list()
+PR3_res$S1 <- round((pi * PR3$D1^2)/4, 2)
+PR3_res$Q1 <- round(PR3$v1 * PR3_res$S1, 2)
+PR3_res$Q2 <- round(PR3_res$Q1, 2)
+PR3_res$S2 <- round((pi * PR3$D2^2)/4, 2)
+PR3_res$v2 <- round(PR3_res$Q2 / PR3_res$S2, 2)
+PR3_res$S3 <- round(PR3_res$Q2 * 2 / PR3$v3, 2)
+PR3_res$D3 <- round(sqrt((4 * PR3_res$S3) / pi), 2)
+PR3_res$Q4 <- round(PR3_res$Q2 / 4, 2)
+PR3_res$S4 <- round(PR3_res$S3 / 3, 2)
+PR3_res$v4 <- round(PR3_res$Q4 / PR3_res$S4, 2)
+PR3_res$D4 <- round(sqrt((4 * PR3_res$S4) / pi), 2)
+```
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+Profil                 & 1              & 2               & 3               & 4               \\ \hline
+v (m$\cdot$ s $^{-1}$) & `r PR3$v1`     & `r PR3_res$v2`  & `r PR3$v3`      & `r PR3_res$v4`  \\ \hline
+Q (l$\cdot$ s $^{-1}$) & `r PR3_res$Q1` & `r PR3_res$Q2`  & 2Q$_{2}$        & Q$_2$/4         \\ \hline
+D (cm)                 & `r PR3$D1`     & `r PR3$D2`      & `r PR3_res$D3`  & `r PR3_res$D4`  \\ \hline
+S (cm$^{2}$)           & `r PR3_res$S1` & `r PR3_res$S2`  & `r PR3_res$S3`  & 1/3 S$_3$       \\ \hline
+\end{tabular}
+\end{table}
+
+
 #### Příklad 4  
 ```{r, echo = FALSE}
 PR4_res <- list()
@@ -262,5 +294,27 @@ PR4_res$cv <- (PR4$Q1 * PR4$c1 + PR4$Q2 + PR4$c2) / (PR4$Q1 + PR4$Q2)
 ```
 Koncentrace po soutoku je rovna $c$ = `r round(PR4_res$cv, 3)` mg$\cdot$ l$^{-1}$. 
 
-#### Příklad 5   
+#### Příklad 5
+```{r, echo = FALSE}
+PR5_res <- list()
+PR5_res$O <- round(PR5$b + 2 * PR5$h * sqrt(1.5 * 1.5 + 1), 2)
+PR5_res$S <- round(PR5$h * (PR5$b + 1.5 * PR5$b), 2)
+PR5_res$R <- round(PR5_res$S / PR5_res$O, 2)
+PR5_res$C <- round((1 / PR5$n) * (PR5_res$R)^(1 / 6), 2)
+PR5_res$v <- round(PR5_res$C * sqrt(PR5_res$R * 0.02), 2)
+PR5_res$Q <- round(PR5_res$S * PR5_res$v, 2)
+```
 
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+Jednotka                & Výsledek            \\ \hline
+O (m)                   & `r PR5_res$O`       \\ \hline
+S (m$^{2}$)             & `r PR5_res$S`       \\ \hline
+R (-)                   & `r PR5_res$R`       \\ \hline
+C (m$^{0.5}.$s$^{-1}$)  & `r PR5_res$C`       \\ \hline
+v (m$\cdot$ s $^{-1}$)  &`r PR5_res$v`        \\ \hline
+Q (m$^{3}$.s $^{-1}$)   & `r PR5_res$Q`       \\ \hline
+\end{tabular}
+\end{table}
