@@ -218,14 +218,15 @@ PR4$Q2 <- round(runif(1, 1, 9), 0)
 PR4$c2 <- round(runif(1, 0.010, 0.050), 3)
 ```
 
-V pozorovaném místě byl v řece naměřen průtok $Q_1$ = `r PR4$Q1` l$\cdot$ s$^{-1}$ a zjištěna koncentrace kontaminační látky $c_1=$ `r PR4$c1`  mg$\cdot$ l$^{-1}$. Dále po toku do něj vstupuje výpust $Q_2$ = `r PR4$Q2` l$\cdot$ s$^{-1}$ s koncentrací $Q_2=$ `r PR4$c2` mg$\cdot$ l$^{-1}$. Vypočítejte celkovou koncetraci látky za soutokem.
+V pozorovaném místě byl v řece naměřen průtok $Q_1$ = `r PR4$Q1` l$\cdot$ s$^{-1}$ a zjištěna koncentrace kontaminační látky $c_1=$ `r PR4$c1`  mg$\cdot$ l$^{-1}$. Dále po toku do něj vstupuje výpust $Q_2$ = `r PR4$Q2` l$\cdot$ s$^{-1}$ s koncentrací $c_2=$ `r PR4$c2` mg$\cdot$ l$^{-1}$. Vypočítejte celkovou koncetraci látky za soutokem.
 \vskip5cm
 
 ## Příklad 5 (7 bodů)
 ```{r, echo = FALSE}
 # objem nádrže
 PR5 <- list()
-PR5$V <- round(runif(1, 100, 300), 0)
+PR5$V <- round(runif(1, 100, 300), 0) * 1000
+PR5$V_text <- PR5$V / 1000
 PR5$stav <- sample(c("prázdná", "plná"), 1)
 PR5$A <- round(runif(1, 10, 30), 0)
 PR5$ET <- round(runif(1, 100, 900), 0)
@@ -240,7 +241,7 @@ PR5$I_ET <- round(runif(1, 1, 2), 1)
 PR5$Qmin <- round(runif(1, 5, 10), 0)
 ```
 
-Vypočítejte bilanci vodní nádrže o objemu `r paste(PR5$V,"000", sep = " ")` m$^{3}$ s plochou vodní hladiny `r paste(PR5$A,"000", sep = " ")` m$^{2}$. Když byla na začátku roku `r PR5$stav`. Uvažujte roční výpar `r PR5$ET` mm.
+Vypočítejte bilanci vodní nádrže o objemu `r paste(PR5$V_text,"000", sep = " ")` m$^{3}$ s plochou vodní hladiny `r paste(PR5$A,"000", sep = " ")` m$^{2}$. Když byla na začátku roku `r PR5$stav`. Uvažujte roční výpar `r PR5$ET` mm.
 
 
 \begin{table}[h!]
@@ -274,7 +275,7 @@ Odtokový součinitel je $\varphi$ = `r round(PR1_res$phi, 2)`.
 #### Příklad 2   
 ```{r, echo = FALSE}
 PR2_res <- list()
-PR2_res$Qout <- (PR2$Hs * 1e-03 * 60 * 60 * 24 * 365) / (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
+PR2_res$Qout <- (PR2$Hs / 1000 * PR2$A * 1000000 * PR2$phi) / (60 * 60 * 24 * 365) * 1000 
 ```
 Odtok z povodí je $Q$ = `r round(PR2_res$Qout, 2)` $m^{3}$
 
@@ -300,10 +301,10 @@ PR3_res$D4 <- round(sqrt((4 * PR3_res$S4) / pi), 2)
 \begin{tabular}{|l|c|c|c|c|}
 \hline
 Profil                 & 1              & 2               & 3               & 4               \\ \hline
-v (m$\cdot$ s $^{-1}$) & `r PR3$v1`     & `r PR3_res$v2`  & `r PR3$v3`      & `r PR3_res$v4`  \\ \hline
-Q (l$\cdot$ s $^{-1}$) & `r PR3_res$Q1` & `r PR3_res$Q2`  & 2Q$_{2}$        & Q$_2$/4         \\ \hline
-D (cm)                 & `r PR3$D1`     & `r PR3$D2`      & `r PR3_res$D3`  & `r PR3_res$D4`  \\ \hline
-S (cm$^{2}$)           & `r PR3_res$S1` & `r PR3_res$S2`  & `r PR3_res$S3`  & 1/3 S$_3$       \\ \hline
+v (m$\cdot$ s $^{-1}$) & `r PR3$v1`     & \textbf{`r PR3_res$v2`}  & `r PR3$v3`      & \textbf{`r PR3_res$v4`}  \\ \hline
+Q (l$\cdot$ s $^{-1}$) & \textbf{`r PR3_res$Q1`} & \textbf{`r PR3_res$Q2`}  & 2Q$_{2}$        & Q$_2$/4         \\ \hline
+D (cm)                 & `r PR3$D1`     & `r PR3$D2`      & \textbf{`r PR3_res$D3`}  & \textbf{`r PR3_res$D4`}  \\ \hline
+S (cm$^{2}$)           & \textbf{`r PR3_res$S1`} & \textbf{`r PR3_res$S2`}  & \textbf{`r PR3_res$S3`}  & 1/3 S$_3$       \\ \hline
 \end{tabular}
 \end{table}
 
@@ -311,36 +312,43 @@ S (cm$^{2}$)           & `r PR3_res$S1` & `r PR3_res$S2`  & `r PR3_res$S3`  & 1/
 #### Příklad 4  
 ```{r, echo = FALSE}
 PR4_res <- list()
-PR4_res$cv <- (PR4$Q1 * PR4$c1 + PR4$Q2 + PR4$c2) / (PR4$Q1 + PR4$Q2)
+PR4_res$cv <- ((PR4$Q1 * PR4$c1) + (PR4$Q2 * PR4$c2)) / (PR4$Q1 + PR4$Q2)
 ```
-Koncentrace po soutoku je rovna $c$ = `r round(PR4_res$cv, 3)` mg$\cdot$ l$^{-1}$. 
+Koncentrace po soutoku je rovna $c$ = `r round(PR4_res$cv, 5)` mg$\cdot$ l$^{-1}$. 
 
 #### Příklad 5   
 ```{r, echo = FALSE}
 PR5_res <- list()
-PR5_res$XI_Qminm3 <- round(PR5$Qmin * 10^(-3) * 60 * 60 * 24 * 30, 2)
-PR5_res$XII_Qminm3 <- round(PR5$Qmin * 10^(-3) * 60 * 60 * 24 * 31, 2)
-PR5_res$I_Qminm3 <- round(PR5$Qmin * 10^(-3) * 60 * 60 * 24 * 31, 2)
+PR5_res$XI_Qminm3 <- round(PR5$Qmin * 10^(-3) * 60 * 60 * 24 * 30, 0)
+PR5_res$XII_Qminm3 <- round(PR5$Qmin * 10^(-3) * 60 * 60 * 24 * 31, 0)
+PR5_res$I_Qminm3 <- round(PR5$Qmin * 10^(-3) * 60 * 60 * 24 * 31, 0)
 
 PR5_res$XI_Qinm3 <- round(PR5$XI_Qin * 10^(-3) * 60 * 60 * 24 * 30, 2)
 PR5_res$XII_Qinm3 <- round(PR5$XII_Qin * 10^(-3) * 60 * 60 * 24 * 31, 2)
 PR5_res$I_Qinm3 <- round(PR5$I_Qin * 10^(-3) * 60 * 60 * 24 * 31, 2)
   
-PR5_res$XI_ETm3 <- round(PR5$XI_ET * 10^(-2) * (PR5$ET) * 10^(-3) * PR5$A * 10^(3), 2) 
-PR5_res$XII_ETm3 <- round(PR5$XII_ET * 10^(-2) * (PR5$ET) * 10^(-3) * PR5$A * 10^(3), 2)
-PR5_res$I_ETm3 <- round(PR5$I_ET * 10^(-2) * (PR5$ET) * 10^(-3) * PR5$A * 10^(3), 2)
+PR5_res$XI_ETm3 <- round(PR5$XI_ET * 10^(-2) * (PR5$ET) * 10^(-3) * PR5$A * 10^(3), 3) 
+PR5_res$XII_ETm3 <- round(PR5$XII_ET * 10^(-2) * (PR5$ET) * 10^(-3) * PR5$A * 10^(3), 3)
+PR5_res$I_ETm3 <- round(PR5$I_ET * 10^(-2) * (PR5$ET) * 10^(-3) * PR5$A * 10^(3), 3)
 
 PR5_res$XI_ETl <- round(PR5_res$XI_ETm3 * 10^(3) / 60 / 60 / 24 / 30, 2)
 PR5_res$XII_ETl <- round(PR5_res$XII_ETm3 * 10^(3) / 60 / 60 / 24 / 30, 2)
 PR5_res$I_ETl <- round(PR5_res$I_ETm3 * 10^(3) / 60 / 60 / 24 / 30, 2) 
 
-PR5_res$XI_bil <- round(PR5_res$XI_Qinm3 - PR5_res$XI_Qminm3 - PR5_res$XI_ETm3, 2)
-PR5_res$XII_bil <- round(PR5_res$XII_Qinm3 - PR5_res$XII_Qminm3 - PR5_res$XII_ETm3, 2) 
-PR5_res$I_bil <- round(PR5_res$I_Qinm3 - PR5_res$I_Qminm3 - PR5_res$I_ETm3, 2)
+PR5_res$XI_bil <- round(PR5_res$XI_Qinm3 - PR5_res$XI_Qminm3 - PR5_res$XI_ETm3, 0)
+PR5_res$XII_bil <- round(PR5_res$XII_Qinm3 - PR5_res$XII_Qminm3 - PR5_res$XII_ETm3, 0) 
+PR5_res$I_bil <- round(PR5_res$I_Qinm3 - PR5_res$I_Qminm3 - PR5_res$I_ETm3, 0)
 
-PR5_res$XI_zas <- round(PR5$V + PR5_res$XI_bil, 2)
-PR5_res$XII_zas <- round(PR5_res$XI_zas + PR5_res$XII_bil, 2)
-PR5_res$I_zas <- round(PR5_res$XII_zas + PR5_res$I_bil, 2)
+if (PR5$stav == "plná") {
+  PR5_res$XI_zas <- round(PR5$V + PR5_res$XI_bil, 0)
+  PR5_res$XII_zas <- round(PR5_res$XI_zas + PR5_res$XII_bil, 0)
+  PR5_res$I_zas <- round(PR5_res$XII_zas + PR5_res$I_bil, 0)
+} else {
+  PR5_res$XI_zas <- round(PR5_res$XI_bil, 0)
+  PR5_res$XII_zas <- round(PR5_res$XI_zas + PR5_res$XII_bil, 0)
+  PR5_res$I_zas <- round(PR5_res$XII_zas + PR5_res$I_bil, 0)
+}
+
 ```
 
 
@@ -349,13 +357,13 @@ PR5_res$I_zas <- round(PR5_res$XII_zas + PR5_res$I_bil, 2)
 \begin{tabular}{|l|c|c|c|c|}
 \hline 
 měsíc                                   &  XI                 & XII                 & I                    \\ \hline
-přítok (l$\cdot$ s$^{-1}$)              &`r PR5$XI_Qin`       &`r PR5$XII_Qin`      &`r PR5$I_Qin`        \\ \hline
+přítok (l$\cdot$ s$^{-1}$)              & \textbf{`r PR5$XI_Qin`}  & \textbf{`r PR5$XII_Qin`}      & \textbf{`r PR5$I_Qin`}        \\ \hline
 přítok (m$^3$)                          &`r as.character(PR5_res$XI_Qinm3)` &`r as.character(PR5_res$XII_Qinm3)`&`r as.character(PR5_res$I_Qinm3)`  \\ \hline
 výpar (l$\cdot$ s$^{-1}$)               &`r PR5_res$XI_ETl`   &`r PR5_res$XII_ETl`  &`r PR5_res$I_ETl`    \\ \hline
 výpar (m$^3$)                           &`r PR5_res$XI_ETm3`  &`r PR5_res$XII_ETm3` &`r PR5_res$I_ETm3`   \\ \hline
-výpar (\%)                              &`r PR5$XI_ET`        &`r PR5$XII_ET`      &`r PR5$I_ET`            \\ \hline
-min. zůst. průtok (l$\cdot$ s$^{-1}$)   &`r PR5$Qmin`         &`r PR5$Qmin`        &`r PR5$Qmin`            \\ \hline
-min. zůst. průtok (m$^3$)               &`r as.character(PR5_res$XI_Qminm3)`&`r as.character(PR5_res$XI_Qminm3)`&`r as.character(PR5_res$XI_Qminm3)`\\ \hline
+výpar (\%)                              & \textbf{`r PR5$XI_ET`}  & \textbf{`r PR5$XII_ET`} & \textbf{`r PR5$I_ET`}            \\ \hline
+min. zůst. průtok (l$\cdot$ s$^{-1}$)   & \textbf{`r PR5$Qmin`}   & \textbf{`r PR5$Qmin`}   & \textbf{`r PR5$Qmin`}            \\ \hline
+min. zůst. průtok (m$^3$)               &`r as.character(PR5_res$XI_Qminm3)`&`r as.character(PR5_res$XII_Qminm3)`&`r as.character(PR5_res$I_Qminm3)`\\ \hline
 bilance                                 & `r as.character(PR5_res$XI_bil)`  & `r as.character(PR5_res$XII_bil)` & `r as.character(PR5_res$I_bil)`    \\ \hline
 
 zásoba                                  & `r as.character(PR5_res$XI_zas)`  & `r as.character(PR5_res$XII_zas)` & `r as.character(PR5_res$I_zas)`     \\ \hline

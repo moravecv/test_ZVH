@@ -219,7 +219,7 @@ PR4$Q2 <- round(runif(1, 1, 9), 0)
 PR4$c2 <- round(runif(1, 0.010, 0.050), 3)
 ```
 
-V pozorovaném místě byl v řece naměřen průtok $Q_1$ = `r PR4$Q1` l$\cdot$ s$^{-1}$ a zjištěna koncentrace kontaminační látky $c_1=$ `r PR4$c1`  mg$\cdot$ l$^{-1}$. Dále po toku do něj vstupuje výpust $Q_2$ = `r PR4$Q2` l$\cdot$ s$^{-1}$ s koncentrací $Q_2=$ `r PR4$c2` mg$\cdot$ l$^{-1}$. Vypočítejte celkovou koncetraci látky za soutokem.
+V pozorovaném místě byl v řece naměřen průtok $Q_1$ = `r PR4$Q1` l$\cdot$ s$^{-1}$ a zjištěna koncentrace kontaminační látky $c_1=$ `r PR4$c1`  mg$\cdot$ l$^{-1}$. Dále po toku do něj vstupuje výpust $Q_2$ = `r PR4$Q2` l$\cdot$ s$^{-1}$ s koncentrací $c_2=$ `r PR4$c2` mg$\cdot$ l$^{-1}$. Vypočítejte celkovou koncetraci látky za soutokem.
 \vskip5cm
 
 ## Příklad 5 (7 bodů)
@@ -253,7 +253,7 @@ Odtokový součinitel je $\varphi$ = `r round(PR1_res$phi, 2)`.
 #### Příklad 2   
 ```{r, echo = FALSE}
 PR2_res <- list()
-PR2_res$Qout <- (PR2$Hs * 1e-03 * 60 * 60 * 24 * 365) / (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
+PR2_res$Qout <- (PR2$Hs / 1000 * PR2$A * 1000000 * PR2$phi) / (60 * 60 * 24 * 365) * 1000 
 ```
 Odtok z povodí je $Q$ = `r round(PR2_res$Qout, 2)` $m^{3}$
 
@@ -279,10 +279,10 @@ PR3_res$D4 <- round(sqrt((4 * PR3_res$S4) / pi), 2)
 \begin{tabular}{|l|c|c|c|c|}
 \hline
 Profil                 & 1              & 2               & 3               & 4               \\ \hline
-v (m$\cdot$ s $^{-1}$) & `r PR3$v1`     & `r PR3_res$v2`  & `r PR3$v3`      & `r PR3_res$v4`  \\ \hline
-Q (l$\cdot$ s $^{-1}$) & `r PR3_res$Q1` & `r PR3_res$Q2`  & 2Q$_{2}$        & Q$_2$/4         \\ \hline
-D (cm)                 & `r PR3$D1`     & `r PR3$D2`      & `r PR3_res$D3`  & `r PR3_res$D4`  \\ \hline
-S (cm$^{2}$)           & `r PR3_res$S1` & `r PR3_res$S2`  & `r PR3_res$S3`  & 1/3 S$_3$       \\ \hline
+v (m$\cdot$ s $^{-1}$) & `r PR3$v1`     & \textbf{`r PR3_res$v2`}  & `r PR3$v3`      & \textbf{`r PR3_res$v4`}  \\ \hline
+Q (l$\cdot$ s $^{-1}$) & \textbf{`r PR3_res$Q1`} & \textbf{`r PR3_res$Q2`}  & 2Q$_{2}$        & Q$_2$/4         \\ \hline
+D (cm)                 & `r PR3$D1`     & `r PR3$D2`      & \textbf{`r PR3_res$D3`}  & \textbf{`r PR3_res$D4`}  \\ \hline
+S (cm$^{2}$)           & \textbf{`r PR3_res$S1`} & \textbf{`r PR3_res$S2`}  & \textbf{`r PR3_res$S3`}  & 1/3 S$_3$       \\ \hline
 \end{tabular}
 \end{table}
 
@@ -290,19 +290,19 @@ S (cm$^{2}$)           & `r PR3_res$S1` & `r PR3_res$S2`  & `r PR3_res$S3`  & 1/
 #### Příklad 4  
 ```{r, echo = FALSE}
 PR4_res <- list()
-PR4_res$cv <- (PR4$Q1 * PR4$c1 + PR4$Q2 + PR4$c2) / (PR4$Q1 + PR4$Q2)
+PR4_res$cv <- ((PR4$Q1 * PR4$c1) + (PR4$Q2 * PR4$c2)) / (PR4$Q1 + PR4$Q2)
 ```
-Koncentrace po soutoku je rovna $c$ = `r round(PR4_res$cv, 3)` mg$\cdot$ l$^{-1}$. 
+Koncentrace po soutoku je rovna $c$ = `r round(PR4_res$cv, 5)` mg$\cdot$ l$^{-1}$. 
 
 #### Příklad 5
 ```{r, echo = FALSE}
 PR5_res <- list()
-PR5_res$O <- round(PR5$b + 2 * PR5$h * sqrt(1.5 * 1.5 + 1), 2)
-PR5_res$S <- round(PR5$h * (PR5$b + 1.5 * PR5$b), 2)
-PR5_res$R <- round(PR5_res$S / PR5_res$O, 2)
-PR5_res$C <- round((1 / PR5$n) * (PR5_res$R)^(1 / 6), 2)
-PR5_res$v <- round(PR5_res$C * sqrt(PR5_res$R * 0.02), 2)
-PR5_res$Q <- round(PR5_res$S * PR5_res$v, 2)
+PR5_res$O <- PR5$b + 2 * PR5$h * sqrt(1.5 * 1.5 + 1)
+PR5_res$S <- PR5$h * (PR5$b + 1.5 * PR5$h)
+PR5_res$R <- PR5_res$S / PR5_res$O
+PR5_res$C <- (1 / PR5$n) * (PR5_res$R)^(1 / 6)
+PR5_res$v <- PR5_res$C * sqrt(PR5_res$R * 0.02)
+PR5_res$Q <- PR5_res$S * PR5_res$v
 ```
 
 \begin{table}[h!]
@@ -310,11 +310,11 @@ PR5_res$Q <- round(PR5_res$S * PR5_res$v, 2)
 \begin{tabular}{|l|c|}
 \hline
 Jednotka                & Výsledek            \\ \hline
-O (m)                   & `r PR5_res$O`       \\ \hline
-S (m$^{2}$)             & `r PR5_res$S`       \\ \hline
-R (-)                   & `r PR5_res$R`       \\ \hline
-C (m$^{0.5}.$s$^{-1}$)  & `r PR5_res$C`       \\ \hline
-v (m$\cdot$ s $^{-1}$)  &`r PR5_res$v`        \\ \hline
-Q (m$^{3}$.s $^{-1}$)   & `r PR5_res$Q`       \\ \hline
+O (m)                   & `r round(PR5_res$O, 3)`       \\ \hline
+S (m$^{2}$)             & `r round(PR5_res$S, 3)`       \\ \hline
+R (-)                   & `r round(PR5_res$R, 3)`       \\ \hline
+C (m$^{0.5}.$s$^{-1}$)  & `r round(PR5_res$C, 3)`       \\ \hline
+v (m$\cdot$ s $^{-1}$)  & `r round(PR5_res$v, 3)`        \\ \hline
+Q (m$^{3}$.s $^{-1}$)   & `r round(PR5_res$Q, 3)`       \\ \hline
 \end{tabular}
 \end{table}
