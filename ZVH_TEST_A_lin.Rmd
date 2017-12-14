@@ -249,7 +249,7 @@ Vypočítejte bilanci vodní nádrže o objemu `r paste(PR5$V_text,"000", sep = 
 \begin{tabular}{|l|c|c|c|c|}
 \hline 
 měsíc                                  &  XI          & XII          & I            \\ \hline
-přítok (l$\cdot$ s$^{-1}$)             &`r PR5$XI_Qin`&`r PR5$XI_Qin`&`r PR5$I_Qin` \\ \hline
+přítok (l$\cdot$ s$^{-1}$)             &`r PR5$XI_Qin`&`r PR5$XII_Qin`&`r PR5$I_Qin` \\ \hline
 přítok (m$^3$)                         &              &              &              \\ \hline
 výpar (l$\cdot$ s$^{-1}$)              &              &              &              \\ \hline
 výpar (m$^3$)                          &              &              &              \\ \hline
