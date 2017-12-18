@@ -231,14 +231,14 @@ PR5$n <- round(runif(1, 0.02, 0.05), 2)
 PR5$b <- round(runif(1,0.5,1.5),1)
 ```
 
-Vypočítejte průtok v otevřeném pravidelném lichoběžníkovém korytě ve výšce $h$ = `r PR5$h`. Využijte Chézyho rovnice.    
+Vypočítejte průtok v otevřeném pravidelném lichoběžníkovém korytě ve výšce $h$ = `r PR5$h` m. Využijte Chézyho rovnice.    
 Vzorce pro geometrii koryta:   
 \begin{align}
 O &= b + 2\sqrt{(hm)^2 + h^2}\\   
 S &= h(b + hm)
 \end{align}
 
-Dále je dán 2\% podélný sklon koryta, drsnost obou břehů $n$ = `r PR5$n`, šířka dna $b$ = `r PR5$b` a sklon svahu $m$ = 1,5.
+Dále je dán 2\% podélný sklon koryta, drsnost obou břehů $n$ = `r PR5$n`, šířka dna $b$ = `r PR5$b` m a sklon svahu $m$ = 1,5.
 
 
 \newpage
@@ -260,10 +260,10 @@ Odtok z povodí je $Q$ = `r round(PR2_res$Qout, 2)` $m^{3}$
 #### Příklad 3
 ```{r, echo = FALSE}
 PR3_res <- list()
-PR3_res$S1 <- round((pi * PR3$D1^2)/4, 2)
+PR3_res$S1 <- round((pi * (PR3$D1 / 100)^2)/4, 2)
 PR3_res$Q1 <- round(PR3$v1 * PR3_res$S1, 2)
 PR3_res$Q2 <- round(PR3_res$Q1, 2)
-PR3_res$S2 <- round((pi * PR3$D2^2)/4, 2)
+PR3_res$S2 <- round((pi * (PR3$D2 / 100)^2)/4, 2)
 PR3_res$v2 <- round(PR3_res$Q2 / PR3_res$S2, 2)
 PR3_res$S3 <- round(PR3_res$Q2 * 2 / PR3$v3, 2)
 PR3_res$D3 <- round(sqrt((4 * PR3_res$S3) / pi), 2)

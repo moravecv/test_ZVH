@@ -191,7 +191,7 @@ PR3$v4 <- round(runif(1, min = 0.5, max = 4), 2)
 PR3$D4 <- round(runif(1, min = 0.5, max = 4), 2)
 ```
 
-Potrubím protéká voda. Dopočítejte hodnoty ve čtyřech měřících profilech $S_1$ = `r PR3$Q1` cm$^{2}$. Uvažujte ideální kapalinu a kruhový přůřez potrubí. Užijte znalosti, že Q$_1$ = Q$_2$.  
+Potrubím protéká voda. Dopočítejte hodnoty ve čtyřech měřících profilech. Uvažujte ideální kapalinu a kruhový přůřez potrubí. Užijte znalosti, že Q$_1$ = Q$_2$.  
 
 
 \begin{table}[h!]
@@ -241,7 +241,7 @@ PR5$I_ET <- round(runif(1, 1, 2), 1)
 PR5$Qmin <- round(runif(1, 5, 10), 0)
 ```
 
-Vypočítejte bilanci vodní nádrže o objemu `r paste(PR5$V_text,"000", sep = " ")` m$^{3}$ s plochou vodní hladiny `r paste(PR5$A,"000", sep = " ")` m$^{2}$. Když byla na začátku roku `r PR5$stav`. Uvažujte roční výpar `r PR5$ET` mm.
+Vypočítejte bilanci vodní nádrže o objemu `r paste(PR5$V_text,"000", sep = " ")` m$^{3}$ s plochou vodní hladiny `r paste(PR5$A,"000", sep = " ")` m$^{2}$. Když byla na začátku hydrologického roku `r PR5$stav`. Uvažujte roční výpar `r PR5$ET` mm.
 
 
 \begin{table}[h!]
@@ -282,10 +282,10 @@ Odtok z povodí je $Q$ = `r round(PR2_res$Qout, 2)` $m^{3}$
 #### Příklad 3
 ```{r, echo = FALSE}
 PR3_res <- list()
-PR3_res$S1 <- round((pi * PR3$D1^2)/4, 2)
+PR3_res$S1 <- round((pi * (PR3$D1 / 100)^2)/4, 2)
 PR3_res$Q1 <- round(PR3$v1 * PR3_res$S1, 2)
 PR3_res$Q2 <- round(PR3_res$Q1, 2)
-PR3_res$S2 <- round((pi * PR3$D2^2)/4, 2)
+PR3_res$S2 <- round((pi * (PR3$D2 / 100)^2)/4, 2)
 PR3_res$v2 <- round(PR3_res$Q2 / PR3_res$S2, 2)
 PR3_res$S3 <- round(PR3_res$Q2 * 2 / PR3$v3, 2)
 PR3_res$D3 <- round(sqrt((4 * PR3_res$S3) / pi), 2)
