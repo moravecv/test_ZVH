@@ -255,7 +255,7 @@ Odtokový součinitel je $\varphi$ = `r round(PR1_res$phi, 2)`.
 PR2_res <- list()
 PR2_res$Qout <- (PR2$Hs / 1000 * PR2$A * 1000000 * PR2$phi) / (60 * 60 * 24 * 365) * 1000 
 ```
-Odtok z povodí je $Q$ = `r round(PR2_res$Qout, 2)` $m^{3}$
+Odtok z povodí je $Q$ = `r round(PR2_res$Qout, 2)` l$\cdot$s$^{-1}$
 
 #### Příklad 3
 ```{r, echo = FALSE}
