@@ -148,13 +148,13 @@ Dále v mapě vyznačte tyto nádrže: \par
 ## Příklad 1 (7 bodů)
 ```{r echo = FALSE}
 PR1 <- list()
-PR1$A <- round(runif(1, 4, 14), 0)
+PR1$A <- round(runif(1, 8, 20), 0)
 PR1$Hs <- round(runif(1, 400, 900), 0)
 PR1$Qa <- round(runif(1, 40, 90), 0)
 ```
 
-Výpočítejte odtokový součinitel $\varphi$ v povodí o velikosti $A$ = `r PR1$A` km$^{2}$, kde roční úhrn srážek je $H_S$ = `r PR1$Hs` mm
-a průměrný roční průtok v uzávěrovém profilu povodí je $Q_a$ = `r PR1$Qa` l$\cdot$ s$^{-1}$
+Výpočítejte **odtokový součinitel** $\varphi$ v povodí o velikosti $A$ = `r PR1$A` [km$^{2}$], kde roční úhrn srážek je $H_S$ = `r PR1$Hs` [mm]
+a průměrný roční průtok v uzávěrovém profilu povodí je $Q_a$ = `r PR1$Qa` [l$\cdot$ s$^{-1}$]
 \vskip5cm
 
 ## Příklad 2 (7 bodů)
@@ -166,7 +166,7 @@ PR2$phi <- round(runif(1, 0, 1), 2)
 ```
 
 <!-- `r if(params$varianta == "A"){"##Příklad 2 \nVypočítejte měsíční bilanci \n\n$ $\n"}` -->
-Vypočtěte odtok (l$\cdot$s$^{-1}$) z území o rozloze $A$ = `r PR2$A` km$^2$, kterému náleží roční úhrn srážek $Hs$ = `r PR2$Hs` mm a odtokový součintel $\varphi$ = `r PR2$phi`.
+Vypočtěte **odtok [l$\cdot$s$^{-1}$]** z území o rozloze $A$ = `r PR2$A` [km$^2$], kterému náleží roční úhrn srážek $Hs$ = `r PR2$Hs` [mm] a odtokový součintel $\varphi$ = `r PR2$phi`.
 \vskip5cm
 
 ## Příklad 3 (10 bodů)
@@ -198,10 +198,10 @@ Potrubím protéká voda. Dopočítejte hodnoty ve čtyřech měřících profil
 \begin{tabular}{|l|c|c|c|c|}
 \hline
 Profil                 & 1          & 2          & 3          & 4            \\ \hline
-v (m$\cdot$ s $^{-1}$) & `r PR3$v1` &            & `r PR3$v3` &              \\ \hline
-Q (l$\cdot$ s $^{-1}$) &            &            & 2Q$_{2}$   & Q$_2$/4      \\ \hline
-D (cm)                 & `r PR3$D1` & `r PR3$D2` &            &              \\ \hline
-S (cm$^{2}$)           &            &            &            & 1/3 S$_3$    \\ \hline
+v [m$\cdot$ s $^{-1}$] & `r PR3$v1` &            & `r PR3$v3` &              \\ \hline
+Q [l$\cdot$ s $^{-1}$] &            &            & 2Q$_{2}$   & Q$_2$/4      \\ \hline
+D [cm]                 & `r PR3$D1` & `r PR3$D2` &            &              \\ \hline
+S [cm$^{2}$]           &            &            &            & 1/3 S$_3$    \\ \hline
 \end{tabular}
 \end{table}
 
@@ -217,7 +217,7 @@ PR4$Q2 <- round(runif(1, 1, 9), 0)
 PR4$c2 <- round(runif(1, 0.010, 0.050), 3)
 ```
 
-V pozorovaném místě byl v řece naměřen průtok $Q_1$ = `r PR4$Q1` l$\cdot$ s$^{-1}$ a zjištěna koncentrace kontaminační látky $c_1=$ `r PR4$c1`  mg$\cdot$ l$^{-1}$. Dále po toku do něj vstupuje výpust $Q_2$ = `r PR4$Q2` l$\cdot$ s$^{-1}$ s koncentrací $c_2=$ `r PR4$c2` mg$\cdot$ l$^{-1}$. Vypočítejte celkovou koncetraci látky za soutokem.
+V pozorovaném místě byl v řece naměřen průtok $Q_1$ = `r PR4$Q1` [l$\cdot$ s$^{-1}$] a zjištěna koncentrace kontaminační látky $c_1=$ `r PR4$c1`  [mg$\cdot$ l$^{-1}$]. Dále po toku do něj vstupuje výpust $Q_2$ = `r PR4$Q2` [l$\cdot$ s$^{-1}$] s koncentrací $c_2=$ `r PR4$c2` [mg$\cdot$ l$^{-1}$]. Vypočítejte **celkovou koncetraci [mg$\cdot$ l$^{-1}$]** látky za soutokem.
 \vskip5cm
 
 ## Příklad 5 (10 bodů)
@@ -227,16 +227,18 @@ PR5 <- list()
 PR5$h <- round(runif(1, 1, 2), 1)
 PR5$n <- round(runif(1, 0.02, 0.05), 2)
 PR5$b <- round(runif(1,0.5,1.5),1)
+PR5$I <- sample(x = c(1:5), size = 1)
 ```
 
-Vypočítejte průtok v otevřeném pravidelném lichoběžníkovém korytě ve výšce $h$ = `r PR5$h` m. Využijte Chézyho rovnice.    
+Vypočítejte **průtok [m$^{3}\cdot$ s$^{-1}$]** v otevřeném pravidelném lichoběžníkovém korytě ve výšce $h$ = `r PR5$h` [m]. Využijte Chézyho rovnice.    
 Vzorce pro geometrii koryta:   
 \begin{align}
-O &= b + 2\sqrt{(hm)^2 + h^2}\\   
+O &= b + 2*h\sqrt{m^2 + 1}\\   
 S &= h(b + hm)
 \end{align}
 
-Dále je dán 2\% podélný sklon koryta, drsnost obou břehů $n$ = `r PR5$n`, šířka dna $b$ = `r PR5$b` m a sklon svahu $m$ = 1,5.
+Dále je dán `r PR5$I` [\%] podélný sklon koryta, drsnost obou břehů $n$ = `r PR5$n`, šířka dna $b$ = `r PR5$b` [m] a sklon  
+svahu $m$ = 1,5.
 
 
 \newpage
@@ -244,16 +246,26 @@ Dále je dán 2\% podélný sklon koryta, drsnost obou břehů $n$ = `r PR5$n`, 
 #### Příklad 1
 ```{r, echo = FALSE}
 PR1_res <- list()
+PR1_res$Vo <- (PR1$Qa * 1e-03 * 60 * 60 * 24 * 365)
+PR1_res$Vs <- (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
 PR1_res$phi <- (PR1$Qa * 1e-03 * 60 * 60 * 24 * 365) / (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
 ```
-Odtokový součinitel je $\varphi$ = `r round(PR1_res$phi, 2)`.
+**Objem odtoku** je $Vs$ = `r as.integer(PR1_res$Vo)` m$^3$.   
+**Objem srážky** je $Vo$ = `r as.integer(PR1_res$Vs)` m$^3$.   
+   
+**Odtokový součinitel** je $\varphi$ = `r round(PR1_res$phi, 2)`.
 
 #### Příklad 2   
 ```{r, echo = FALSE}
 PR2_res <- list()
+PR2_res$Vs <- PR2$Hs / 1000 * PR2$A * 1000000
+PR2_res$Vo <- (PR2$Hs / 1000 * PR2$A * 1000000 * PR2$phi)
 PR2_res$Qout <- (PR2$Hs / 1000 * PR2$A * 1000000 * PR2$phi) / (60 * 60 * 24 * 365) * 1000 
 ```
-Odtok z povodí je $Q$ = `r round(PR2_res$Qout, 2)` l$\cdot$s$^{-1}$
+**Objem srážky** je $Vs$ = `r as.integer(PR2_res$Vs)` m$^3$.   
+**Objem odtoku** je $Vo$ = `r as.integer(PR2_res$Vo)` m$^3$.   
+    
+**Odtok z povodí** je $Q$ = `r round(PR2_res$Qout, 2)` l$\cdot$s$^{-1}$.
 
 #### Příklad 3
 ```{r, echo = FALSE}
@@ -311,7 +323,7 @@ PR5_res$O <- PR5$b + 2 * PR5$h * sqrt(1.5 * 1.5 + 1)
 PR5_res$S <- PR5$h * (PR5$b + 1.5 * PR5$h)
 PR5_res$R <- PR5_res$S / PR5_res$O
 PR5_res$C <- (1 / PR5$n) * (PR5_res$R)^(1 / 6)
-PR5_res$v <- PR5_res$C * sqrt(PR5_res$R * 0.02)
+PR5_res$v <- PR5_res$C * sqrt(PR5_res$R * PR5$I / 100)
 PR5_res$Q <- PR5_res$S * PR5_res$v
 ```
 
