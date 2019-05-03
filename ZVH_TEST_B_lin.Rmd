@@ -242,7 +242,7 @@ svahu $m$ = 1,5.
 
 
 \newpage
-## Výsledky
+## Výsledky z `r format(Sys.time(), '%d %B %Y')`
 #### Příklad 1
 ```{r, echo = FALSE}
 PR1_res <- list()
@@ -250,8 +250,8 @@ PR1_res$Vo <- (PR1$Qa * 1e-03 * 60 * 60 * 24 * 365)
 PR1_res$Vs <- (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
 PR1_res$phi <- (PR1$Qa * 1e-03 * 60 * 60 * 24 * 365) / (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
 ```
-**Objem odtoku** je $Vs$ = `r as.integer(PR1_res$Vo)` m$^3$.   
-**Objem srážky** je $Vo$ = `r as.integer(PR1_res$Vs)` m$^3$.   
+**Objem srážky** je $Vs$ = `r as.integer(PR1_res$Vs)` m$^3$.   
+**Objem odtoku** je $Vo$ = `r as.integer(PR1_res$Vo)` m$^3$.   
    
 **Odtokový součinitel** je $\varphi$ = `r round(PR1_res$phi, 2)`.
 
