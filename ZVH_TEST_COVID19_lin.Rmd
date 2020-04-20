@@ -1,0 +1,323 @@
+---
+title: "ZVH Zápočtový TEST - Varianta COVID 19"
+# subtitle: "Varianta `r params$varianta`"
+author: "Jméno a příjmení: `r params$jmeno`"
+header-includes: 
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyhf{}
+- \chead{`r params$jmeno`}
+- \lhead{Varianta COVID 19}
+- \usepackage{float}
+- \usepackage{graphics}
+- \usepackage{graphicx}
+- \usepackage{placeins}
+- \usepackage{amsmath}
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: pdf_document
+params:
+  n: 1
+  d: !r Sys.Date()
+  jmeno: "Anna"
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(OutDec = ",")
+```
+
+
+## Příklad 1 (7 bodů)
+```{r echo = FALSE}
+PR1 <- list()
+PR1$A <- round(runif(1, 8, 20), 0)
+PR1$Hs <- round(runif(1, 400, 900), 0)
+PR1$Qa <- round(runif(1, 40, 90), 0)
+```
+
+Výpočítejte **odtokový součinitel** $\varphi$ v povodí o velikosti $A$ = `r PR1$A` [km$^{2}$], kde roční úhrn srážek je $H_S$ = `r PR1$Hs` [mm]
+a průměrný roční průtok v uzávěrovém profilu povodí je $Q_a$ = `r PR1$Qa` [l$\cdot$ s$^{-1}$]
+
+\vskip7cm
+
+## Příklad 2 (7 bodů)
+```{r, echo = FALSE}
+PR2 <- list()
+PR2$A <- round(runif(1, 4, 25), 0)
+PR2$Hs <- round(runif(1, 400, 1400), 0)
+PR2$phi <- round(runif(1, 0, 1), 2)
+```
+
+
+Vypočtěte **odtok [l$\cdot$s$^{-1}$]** z území o rozloze $A$ = `r PR2$A` [km$^2$], kterému náleží roční úhrn srážek $Hs$ = `r PR2$Hs` [mm] a odtokový součintel $\varphi$ = `r PR2$phi`.
+
+\newpage
+
+## Příklad 3 (10 bodů)
+```{r, echo = FALSE}
+# Generování zadání rovnice kontinuity
+PR3 <- list()
+PR3$Q1 <- round(runif(1, min = 0.1, max = 10), 2) # průměr v cm2
+PR3$v1 <- round(runif(1, min = 0.5, max = 4), 2)
+PR3$D1 <- round(runif(1, min = 0.5, max = 4), 2)
+
+PR3$Q2 <- round(runif(1, min = 0.1, max = 10), 2) # průměr v cm2
+PR3$v2 <- round(runif(1, min = 0.5, max = 4), 2)
+PR3$D2 <- round(runif(1, min = 0.5, max = 4), 2)
+
+PR3$Q3 <- round(runif(1, min = 0.1, max = 10), 2) # průměr v cm2
+PR3$v3 <- round(runif(1, min = 0.5, max = 4), 2)
+PR3$D3 <- round(runif(1, min = 0.5, max = 4), 2)
+
+PR3$Q4 <- round(runif(1, min = 0.1, max = 10), 2) # průměr v cm2
+PR3$v4 <- round(runif(1, min = 0.5, max = 4), 2)
+PR3$D4 <- round(runif(1, min = 0.5, max = 4), 2)
+```
+
+Potrubím protéká voda. Dopočítejte hodnoty ve čtyřech měřících profilech. Uvažujte ideální kapalinu a kruhový přůřez potrubí. Užijte znalosti, že Q$_1$ = Q$_2$.  
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+Profil                 & 1          & 2          & 3          & 4            \\ \hline
+v [m$\cdot$ s $^{-1}$] & `r PR3$v1` &            & `r PR3$v3` &              \\ \hline
+Q [l$\cdot$ s $^{-1}$] &            &            & 2Q$_{2}$   & Q$_2$/4      \\ \hline
+D [cm]                 & `r PR3$D1` & `r PR3$D2` &            &              \\ \hline
+S [cm$^{2}$]           &            &            &            & 1/3 S$_3$    \\ \hline
+\end{tabular}
+\end{table}
+
+
+\vskip7cm    
+
+## Příklad 4 (6 bodů)
+```{r, echo = FALSE}
+PR4 <- list()
+PR4$Q1 <- round(runif(1, 40, 90), 0)
+PR4$c1 <- round(runif(1, 0.001, 0.010), 3)
+PR4$Q2 <- round(runif(1, 1, 9), 0)
+PR4$c2 <- round(runif(1, 0.010, 0.050), 3)
+```
+
+V pozorovaném místě byl v řece naměřen průtok $Q_1$ = `r PR4$Q1` [l$\cdot$ s$^{-1}$] a zjištěna koncentrace kontaminační látky $c_1=$ `r PR4$c1`  [mg$\cdot$ l$^{-1}$]. Dále po toku do něj vstupuje výpust $Q_2$ = `r PR4$Q2` [l$\cdot$ s$^{-1}$] s koncentrací $c_2=$ `r PR4$c2` [mg$\cdot$ l$^{-1}$]. Vypočítejte **celkovou koncetraci [mg$\cdot$ l$^{-1}$]** látky za soutokem.
+
+\newpage
+
+## Příklad 5 (10 bodů)
+```{r, echo = FALSE}
+PR5 <- list()
+PR5$h <- round(runif(1, 1, 2), 1)
+PR5$n <- round(runif(1, 0.02, 0.05), 2)
+PR5$b <- round(runif(1,0.5,1.5),1)
+PR5$I <- sample(x = c(1:5), size = 1)
+```
+
+Vypočítejte **průtok [m$^{3}\cdot$ s$^{-1}$]** v otevřeném pravidelném lichoběžníkovém korytě ve výšce $h$ = `r PR5$h` [m]. Využijte Chézyho rovnice.    
+Vzorce pro geometrii koryta:   
+\begin{align}
+O &= b + 2*h\sqrt{m^2 + 1}\\   
+S &= h(b + hm)
+\end{align}
+
+Dále je dán `r PR5$I` [\%] podélný sklon koryta, drsnost obou břehů $n$ = `r PR5$n`, šířka dna $b$ = `r PR5$b` [m] a sklon  
+svahu $m$ = 1,5.
+
+\vskip5cm
+
+## Příklad 6 (10 bodů)
+```{r, echo = FALSE}
+# objem nádrže
+PR6 <- list()
+PR6$V <- round(runif(1, 100, 300), 0) * 1000
+PR6$V_text <- PR6$V / 1000
+PR6$stav <- sample(c("prázdná", "plná"), 1)
+PR6$A <- round(runif(1, 10, 30), 0)
+PR6$ET <- round(runif(1, 100, 900), 0)
+PR6$XI_Qin <- round(runif(1, 20, 60), 0)
+PR6$XII_Qin <- round(runif(1, 20, 60), 0)
+PR6$I_Qin <- round(runif(1, 20, 60), 0)
+
+PR6$XI_ET <- round(runif(1, 1, 4), 1)
+PR6$XII_ET <- round(runif(1, 1, 3), 1)
+PR6$I_ET <- round(runif(1, 1, 2), 1)
+
+PR6$Qmin <- round(runif(1, 5, 10), 0)
+```
+
+Vypočítejte bilanci vodní nádrže o objemu `r paste(PR6$V_text,"000", sep = " ")` [m$^{3}$] s plochou vodní hladiny `r paste(PR6$A,"000", sep = " ")` [m$^{2}$]. Když byla na začátku hydrologického roku `r PR6$stav`. Uvažujte roční výpar `r PR6$ET` [mm].
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline 
+měsíc                                  &  XI          & XII          & I            \\ \hline
+přítok [l$\cdot$ s$^{-1}$]             &`r PR6$XI_Qin`&`r PR6$XII_Qin`&`r PR6$I_Qin` \\ \hline
+přítok [m$^3$]                         &              &              &              \\ \hline
+výpar [l$\cdot$ s$^{-1}$]              &              &              &              \\ \hline
+výpar [m$^3$]                          &              &              &              \\ \hline
+výpar [\%]                             &`r PR6$XI_ET` &`r PR6$XII_ET`&`r PR6$I_ET`  \\ \hline
+min. zůst. průtok [l$\cdot$ s$^{-1}$]  &`r PR6$Qmin`  &`r PR6$Qmin`  &`r PR6$Qmin`  \\ \hline
+min. zůst. průtok [m$^3$]              &              &              &              \\ \hline
+bilance                                &              &              &              \\ \hline
+zásoba                                 &              &              &              \\ \hline
+\end{tabular}
+\end{table}
+
+
+\newpage
+## Výsledky z `r format(Sys.time(), '%d %B %Y')`
+#### Příklad 1
+```{r, echo = FALSE}
+PR1_res <- list()
+PR1_res$Vo <- (PR1$Qa * 1e-03 * 60 * 60 * 24 * 365)
+PR1_res$Vs <- (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
+PR1_res$phi <- (PR1$Qa * 1e-03 * 60 * 60 * 24 * 365) / (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
+```
+**Objem srážky** je $Vs$ = `r as.integer(PR1_res$Vs)` m$^3$.   
+**Objem odtoku** je $Vo$ = `r as.integer(PR1_res$Vo)` m$^3$.   
+   
+**Odtokový součinitel** je $\varphi$ = `r round(PR1_res$phi, 2)`.
+
+#### Příklad 2   
+```{r, echo = FALSE}
+PR2_res <- list()
+PR2_res$Vs <- PR2$Hs / 1000 * PR2$A * 1000000
+PR2_res$Vo <- (PR2$Hs / 1000 * PR2$A * 1000000 * PR2$phi)
+PR2_res$Qout <- (PR2$Hs / 1000 * PR2$A * 1000000 * PR2$phi) / (60 * 60 * 24 * 365) * 1000 
+```
+**Objem srážky** je $Vs$ = `r as.integer(PR2_res$Vs)` m$^3$.   
+**Objem odtoku** je $Vo$ = `r as.integer(PR2_res$Vo)` m$^3$.   
+    
+**Odtok z povodí** je $Q$ = `r round(PR2_res$Qout, 2)` l$\cdot$s$^{-1}$.
+
+#### Příklad 3
+```{r, echo = FALSE}
+PR3_res <- list()
+PR3_res$S1 <- (pi * PR3$D1^2)/4
+PR3_res$Q1 <- PR3$v1 * PR3_res$S1 / 10000 * 1000
+PR3_res$Q2 <- PR3_res$Q1
+PR3_res$S2 <- (pi * PR3$D2^2)/4
+PR3_res$v2 <- ((PR3_res$Q2 / 1000) / (PR3_res$S2 / 10000))
+PR3_res$S3 <- ((PR3_res$Q2 / 1000 * 2) / PR3$v3 * 10000)
+PR3_res$D3 <- sqrt((4 * PR3_res$S3) / pi)
+PR3_res$Q4 <- PR3_res$Q2 / 4
+PR3_res$S4 <- PR3_res$S3 / 3
+PR3_res$v4 <- ((PR3_res$Q4 / 1000) / (PR3_res$S4 / 10000))
+PR3_res$D4 <- sqrt((4 * PR3_res$S4) / pi)
+
+PR3_res$S1_ <- round(PR3_res$S1, 2)
+PR3_res$Q1_ <- round(PR3_res$Q1, 2)
+PR3_res$Q2_ <- round(PR3_res$Q2, 2)
+PR3_res$S2_ <- round(PR3_res$S2, 2)
+PR3_res$v2_ <- round(PR3_res$v2, 2)
+PR3_res$S3_ <- round(PR3_res$S3, 2)
+PR3_res$D3_ <- round(PR3_res$D3, 2)
+PR3_res$Q4_ <- round(PR3_res$Q4, 2)
+PR3_res$S4_ <- round(PR3_res$S4, 2)
+PR3_res$v4_ <- round(PR3_res$v4, 2)
+PR3_res$D4_ <- round(PR3_res$D4, 2)
+```
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+Profil                 & 1              & 2               & 3               & 4               \\ \hline
+v (m$\cdot$ s $^{-1}$) & `r PR3$v1`     & \textbf{`r PR3_res$v2_`}  & `r PR3$v3`      & \textbf{`r PR3_res$v4_`}  \\ \hline
+Q (l$\cdot$ s $^{-1}$) & \textbf{`r PR3_res$Q1_`} & \textbf{`r PR3_res$Q2_`}  & 2Q$_{2}$        & Q$_2$/4         \\ \hline
+D (cm)                 & `r PR3$D1`     & `r PR3$D2`      & \textbf{`r PR3_res$D3_`}  & \textbf{`r PR3_res$D4_`}  \\ \hline
+S (cm$^{2}$)           & \textbf{`r PR3_res$S1_`} & \textbf{`r PR3_res$S2_`}  & \textbf{`r PR3_res$S3_`}  & 1/3 S$_3$  \\ \hline
+\end{tabular}
+\end{table}
+
+
+#### Příklad 4  
+```{r, echo = FALSE}
+PR4_res <- list()
+PR4_res$cv <- ((PR4$Q1 * PR4$c1) + (PR4$Q2 * PR4$c2)) / (PR4$Q1 + PR4$Q2)
+```
+Koncentrace po soutoku je rovna $c$ = `r round(PR4_res$cv, 5)` mg$\cdot$ l$^{-1}$. 
+
+#### Příklad 5
+```{r, echo = FALSE}
+PR5_res <- list()
+PR5_res$O <- PR5$b + 2 * PR5$h * sqrt(1.5 * 1.5 + 1)
+PR5_res$S <- PR5$h * (PR5$b + 1.5 * PR5$h)
+PR5_res$R <- PR5_res$S / PR5_res$O
+PR5_res$C <- (1 / PR5$n) * (PR5_res$R)^(1 / 6)
+PR5_res$v <- PR5_res$C * sqrt(PR5_res$R * PR5$I / 100)
+PR5_res$Q <- PR5_res$S * PR5_res$v
+```
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+Jednotka                & Výsledek            \\ \hline
+O (m)                   & `r round(PR5_res$O, 3)`       \\ \hline
+S (m$^{2}$)             & `r round(PR5_res$S, 3)`       \\ \hline
+R (-)                   & `r round(PR5_res$R, 3)`       \\ \hline
+C (m$^{0.5}.$s$^{-1}$)  & `r round(PR5_res$C, 3)`       \\ \hline
+v (m$\cdot$ s $^{-1}$)  & `r round(PR5_res$v, 3)`        \\ \hline
+Q (m$^{3}$.s $^{-1}$)   & `r round(PR5_res$Q, 3)`       \\ \hline
+\end{tabular}
+\end{table}
+
+#### Příklad 6   
+```{r, echo = FALSE}
+PR6_res <- list()
+PR6_res$XI_Qminm3 <- round(PR6$Qmin * 10^(-3) * 60 * 60 * 24 * 30, 0)
+PR6_res$XII_Qminm3 <- round(PR6$Qmin * 10^(-3) * 60 * 60 * 24 * 31, 0)
+PR6_res$I_Qminm3 <- round(PR6$Qmin * 10^(-3) * 60 * 60 * 24 * 31, 0)
+
+PR6_res$XI_Qinm3 <- round(PR6$XI_Qin * 10^(-3) * 60 * 60 * 24 * 30, 0)
+PR6_res$XII_Qinm3 <- round(PR6$XII_Qin * 10^(-3) * 60 * 60 * 24 * 31, 0)
+PR6_res$I_Qinm3 <- round(PR6$I_Qin * 10^(-3) * 60 * 60 * 24 * 31, 0)
+  
+PR6_res$XI_ETm3 <- round(PR6$XI_ET * 10^(-2) * (PR6$ET) * 10^(-3) * PR6$A * 10^(3), 3) 
+PR6_res$XII_ETm3 <- round(PR6$XII_ET * 10^(-2) * (PR6$ET) * 10^(-3) * PR6$A * 10^(3), 3)
+PR6_res$I_ETm3 <- round(PR6$I_ET * 10^(-2) * (PR6$ET) * 10^(-3) * PR6$A * 10^(3), 3)
+
+PR6_res$XI_ETl <- round(PR6_res$XI_ETm3 * 10^(3) / 60 / 60 / 24 / 30, 2)
+PR6_res$XII_ETl <- round(PR6_res$XII_ETm3 * 10^(3) / 60 / 60 / 24 / 30, 2)
+PR6_res$I_ETl <- round(PR6_res$I_ETm3 * 10^(3) / 60 / 60 / 24 / 30, 2) 
+
+PR6_res$XI_bil <- round(PR6_res$XI_Qinm3 - PR6_res$XI_Qminm3 - PR6_res$XI_ETm3, 0)
+PR6_res$XII_bil <- round(PR6_res$XII_Qinm3 - PR6_res$XII_Qminm3 - PR6_res$XII_ETm3, 0) 
+PR6_res$I_bil <- round(PR6_res$I_Qinm3 - PR6_res$I_Qminm3 - PR6_res$I_ETm3, 0)
+
+if (PR6$stav == "plná") {
+  PR6_res$XI_zas <- round(PR6$V + PR6_res$XI_bil, 0)
+  PR6_res$XII_zas <- round(PR6_res$XI_zas + PR6_res$XII_bil, 0)
+  PR6_res$I_zas <- round(PR6_res$XII_zas + PR6_res$I_bil, 0)
+} else {
+  PR6_res$XI_zas <- round(PR6_res$XI_bil, 0)
+  PR6_res$XII_zas <- round(PR6_res$XI_zas + PR6_res$XII_bil, 0)
+  PR6_res$I_zas <- round(PR6_res$XII_zas + PR6_res$I_bil, 0)
+}
+
+```
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline 
+měsíc                                   &  XI                 & XII                 & I                    \\ \hline
+přítok (l$\cdot$ s$^{-1}$)              & \textbf{`r PR6$XI_Qin`}  & \textbf{`r PR6$XII_Qin`}      & \textbf{`r PR6$I_Qin`}        \\ \hline
+přítok (m$^3$)                          &`r as.character(PR6_res$XI_Qinm3)` &`r as.character(PR6_res$XII_Qinm3)`&`r as.character(PR6_res$I_Qinm3)`  \\ \hline
+výpar (l$\cdot$ s$^{-1}$)               &`r PR6_res$XI_ETl`   &`r PR6_res$XII_ETl`  &`r PR6_res$I_ETl`    \\ \hline
+výpar (m$^3$)                           &`r PR6_res$XI_ETm3`  &`r PR6_res$XII_ETm3` &`r PR6_res$I_ETm3`   \\ \hline
+výpar (\%)                              & \textbf{`r PR6$XI_ET`}  & \textbf{`r PR6$XII_ET`} & \textbf{`r PR6$I_ET`}            \\ \hline
+min. zůst. průtok (l$\cdot$ s$^{-1}$)   & \textbf{`r PR6$Qmin`}   & \textbf{`r PR6$Qmin`}   & \textbf{`r PR6$Qmin`}            \\ \hline
+min. zůst. průtok (m$^3$)               &`r as.character(PR6_res$XI_Qminm3)`&`r as.character(PR6_res$XII_Qminm3)`&`r as.character(PR6_res$I_Qminm3)`\\ \hline
+bilance                                 & `r as.character(PR6_res$XI_bil)`  & `r as.character(PR6_res$XII_bil)` & `r as.character(PR6_res$I_bil)`    \\ \hline
+
+zásoba                                  & `r as.character(PR6_res$XI_zas)`  & `r as.character(PR6_res$XII_zas)` & `r as.character(PR6_res$I_zas)`     \\ \hline
+\end{tabular}
+\end{table}
+
