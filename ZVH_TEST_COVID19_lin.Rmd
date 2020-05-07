@@ -38,7 +38,6 @@ PR1$Qa <- round(runif(1, 40, 90), 0)
 Výpočítejte **odtokový součinitel** $\varphi$ v povodí o velikosti $A$ = `r PR1$A` [km$^{2}$], kde roční úhrn srážek je $H_S$ = `r PR1$Hs` [mm]
 a průměrný roční průtok v uzávěrovém profilu povodí je $Q_a$ = `r PR1$Qa` [l$\cdot$ s$^{-1}$]
 
-\vskip7cm
 
 ## Příklad 2 (7 bodů)
 ```{r, echo = FALSE}
@@ -51,7 +50,6 @@ PR2$phi <- round(runif(1, 0, 1), 2)
 
 Vypočtěte **odtok [l$\cdot$s$^{-1}$]** z území o rozloze $A$ = `r PR2$A` [km$^2$], kterému náleží roční úhrn srážek $Hs$ = `r PR2$Hs` [mm] a odtokový součintel $\varphi$ = `r PR2$phi`.
 
-\newpage
 
 ## Příklad 3 (10 bodů)
 ```{r, echo = FALSE}
@@ -90,8 +88,6 @@ S [cm$^{2}$]           &            &            &            & 1/3 S$_3$    \\ 
 \end{table}
 
 
-\vskip7cm    
-
 ## Příklad 4 (6 bodů)
 ```{r, echo = FALSE}
 PR4 <- list()
@@ -103,7 +99,6 @@ PR4$c2 <- round(runif(1, 0.010, 0.050), 3)
 
 V pozorovaném místě byl v řece naměřen průtok $Q_1$ = `r PR4$Q1` [l$\cdot$ s$^{-1}$] a zjištěna koncentrace kontaminační látky $c_1=$ `r PR4$c1`  [mg$\cdot$ l$^{-1}$]. Dále po toku do něj vstupuje výpust $Q_2$ = `r PR4$Q2` [l$\cdot$ s$^{-1}$] s koncentrací $c_2=$ `r PR4$c2` [mg$\cdot$ l$^{-1}$]. Vypočítejte **celkovou koncetraci [mg$\cdot$ l$^{-1}$]** látky za soutokem.
 
-\newpage
 
 ## Příklad 5 (10 bodů)
 ```{r, echo = FALSE}
@@ -114,18 +109,9 @@ PR5$b <- round(runif(1,0.5,1.5),1)
 PR5$I <- sample(x = c(1:5), size = 1)
 ```
 
-Vypočítejte **průtok [m$^{3}\cdot$ s$^{-1}$]** v otevřeném pravidelném lichoběžníkovém korytě ve výšce $h$ = `r PR5$h` [m]. Využijte Chézyho rovnice.    
-Vzorce pro geometrii koryta:   
-\begin{align}
-O &= b + 2*h\sqrt{m^2 + 1}\\   
-S &= h(b + hm)
-\end{align}
+Vypočítejte **průtok [m$^{3}\cdot$ s$^{-1}$]** v otevřeném pravidelném lichoběžníkovém korytě ve výšce $h$ = `r PR5$h` [m]. Využijte Chézyho rovnice. Dále je dán `r PR5$I` [\%] podélný sklon koryta, drsnost obou břehů $n$ = `r PR5$n`, šířka dna $b$ = `r PR5$b` [m] a sklon svahu $m$ = 1,5.
 
-Dále je dán `r PR5$I` [\%] podélný sklon koryta, drsnost obou břehů $n$ = `r PR5$n`, šířka dna $b$ = `r PR5$b` [m] a sklon  
-svahu $m$ = 1,5.
-
-\vskip5cm
-
+\newpage
 ## Příklad 6 (10 bodů)
 ```{r, echo = FALSE}
 # objem nádrže
