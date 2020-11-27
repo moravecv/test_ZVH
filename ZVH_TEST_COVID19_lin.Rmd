@@ -162,6 +162,7 @@ PR1_res$Vo <- (PR1$Qa * 1e-03 * 60 * 60 * 24 * 365)
 PR1_res$Vs <- (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
 PR1_res$phi <- (PR1$Qa * 1e-03 * 60 * 60 * 24 * 365) / (PR1$A * 1e+06 * PR1$Hs * 1e-03) 
 ```
+
 **Objem srážky** je $Vs$ = `r as.integer(PR1_res$Vs)` m$^3$.   
 **Objem odtoku** je $Vo$ = `r as.integer(PR1_res$Vo)` m$^3$.   
    
@@ -174,6 +175,7 @@ PR2_res$Vs <- PR2$Hs / 1000 * PR2$A * 1000000
 PR2_res$Vo <- (PR2$Hs / 1000 * PR2$A * 1000000 * PR2$phi)
 PR2_res$Qout <- (PR2$Hs / 1000 * PR2$A * 1000000 * PR2$phi) / (60 * 60 * 24 * 365) * 1000 
 ```
+
 **Objem srážky** je $Vs$ = `r as.integer(PR2_res$Vs)` m$^3$.   
 **Objem odtoku** je $Vo$ = `r as.integer(PR2_res$Vo)` m$^3$.   
     
